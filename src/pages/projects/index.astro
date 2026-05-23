@@ -1,0 +1,262 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Projects">
+
+  <section id="projects-hero">
+    <p class="eyebrow">Projects</p>
+    <h1 class="page-title">Computational <em>Instruments</em></h1>
+    <p class="page-subtitle">
+      Three tools, three scales, one framework — the AI Virtual Cell.
+    </p>
+  </section>
+
+  <section id="projects-main">
+    <a href="/projects/tme-vi" class="project-row reveal">
+      <div class="project-row-left">
+        <span class="project-index">01</span>
+        <div class="project-row-info">
+          <span class="project-scale">Cellular Scale</span>
+          <h2 class="project-row-name">TME-VI</h2>
+          <p class="project-row-full">
+            Tumor Microenvironment Variational Inference. An uncertainty-aware decoder
+            virtual instrument that combines scVI cellular representations with a Graph
+            Attention Network and Monte Carlo Dropout to predict immune escape and
+            anti-PD-1 immunotherapy response in melanoma patients.
+          </p>
+          <div class="project-stack">
+            <span class="stack-item">scVI</span>
+            <span class="stack-item">GAT</span>
+            <span class="stack-item">MC Dropout</span>
+            <span class="stack-item">GSE120575</span>
+            <span class="stack-item">16,290 cells</span>
+            <span class="stack-item">32 patients</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-row-right">
+        <div class="metric-card">
+          <span class="metric-val">0.885</span>
+          <span class="metric-label">Cell AUROC</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-val">0.97</span>
+          <span class="metric-label">Filtered AUROC</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-val">0.78</span>
+          <span class="metric-label">Patient AUROC</span>
+        </div>
+        <a href="https://huggingface.co" target="_blank" class="hf-link">HF Space ↗</a>
+      </div>
+    </a>
+
+    <a href="/projects/mutagraph" class="project-row reveal">
+      <div class="project-row-left">
+        <span class="project-index">02</span>
+        <div class="project-row-info">
+          <span class="project-scale amber">Molecular Scale</span>
+          <h2 class="project-row-name">MutaGraph</h2>
+          <p class="project-row-full">
+            GNN-based protein mutation effect prediction platform. Predicts how
+            single-point mutations affect protein stability (ΔΔG) and
+            antibody-antigen binding affinity using graph attention over
+            protein structure graphs.
+          </p>
+          <div class="project-stack">
+            <span class="stack-item">PyTorch Geometric</span>
+            <span class="stack-item">GAT</span>
+            <span class="stack-item">ΔΔG</span>
+            <span class="stack-item">Protein Structure</span>
+            <span class="stack-item">Binding Affinity</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-row-right">
+        <a href="https://huggingface.co" target="_blank" class="hf-link amber">HF Space ↗</a>
+      </div>
+    </a>
+
+    <a href="/projects/cellscout" class="project-row reveal">
+      <div class="project-row-left">
+        <span class="project-index">03</span>
+        <div class="project-row-info">
+          <span class="project-scale coral">Knowledge Scale</span>
+          <h2 class="project-row-name">CellScout</h2>
+          <p class="project-row-full">
+            AI research assistant for the AIVC literature. Transforms academic papers
+            into a queryable knowledge graph, enabling researchers to ask natural-language
+            questions and receive cross-paper synthesis powered by a multi-agent RAG system.
+          </p>
+          <div class="project-stack">
+            <span class="stack-item">Multi-agent</span>
+            <span class="stack-item">RAG</span>
+            <span class="stack-item">Knowledge Graph</span>
+            <span class="stack-item">Neo4j</span>
+            <span class="stack-item">Claude API</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-row-right">
+        <a href="https://huggingface.co" target="_blank" class="hf-link coral">HF Space ↗</a>
+      </div>
+    </a>
+  </section>
+
+</Layout>
+
+<style>
+  #projects-hero {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 4rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+  .page-title em { font-style: italic; color: var(--accent-teal); }
+  .page-subtitle {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  #projects-main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-row {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 4rem;
+    padding: 4rem;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: background 0.2s;
+    align-items: start;
+  }
+  .project-row:hover { background: var(--bg-card); }
+  .project-row-left {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .project-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    padding-top: 0.4rem;
+  }
+  .project-scale {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .project-scale.amber { color: var(--accent-amber); }
+  .project-scale.coral { color: var(--accent-coral); }
+  .project-row-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.05;
+    margin-bottom: 1.25rem;
+  }
+  .project-row-full {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 60ch;
+    margin-bottom: 1.5rem;
+  }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-item {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .project-row-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-end;
+  }
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    width: 100%;
+  }
+  .metric-val {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--accent-teal);
+    line-height: 1;
+  }
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .hf-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--accent-teal);
+    text-decoration: none;
+    border: 1px solid rgba(62,207,184,0.3);
+    padding: 0.6rem 1.2rem;
+    transition: all 0.2s;
+  }
+  .hf-link:hover { background: rgba(62,207,184,0.08); }
+  .hf-link.amber { color: var(--accent-amber); border-color: rgba(232,170,90,0.3); }
+  .hf-link.amber:hover { background: rgba(232,170,90,0.08); }
+  .hf-link.coral { color: var(--accent-coral); border-color: rgba(224,112,96,0.3); }
+  .hf-link.coral:hover { background: rgba(224,112,96,0.08); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
