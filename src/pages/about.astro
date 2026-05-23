@@ -1,0 +1,311 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="About">
+
+  <section id="about-hero">
+    <p class="eyebrow">About</p>
+    <h1 class="page-title">Charlie <em>Hou</em></h1>
+    <p class="page-subtitle">
+      CS / AI Engineer · Computational Biology · Boston, MA
+    </p>
+  </section>
+
+  <section id="about-main">
+    <div class="about-grid">
+
+      <div class="about-bio">
+        <p>
+          I'm a software engineer and AI researcher working at the intersection of
+          <strong>graph neural networks</strong>, <strong>single-cell biology</strong>,
+          and <strong>ecological systems</strong>.
+        </p>
+        <br>
+        <p>
+          My work is grounded in the <strong>AI Virtual Cell (AIVC)</strong> framework —
+          the vision that multi-scale neural models can represent and simulate biological
+          behavior from protein mutations to tumor immune microenvironments to entire ecosystems.
+        </p>
+        <br>
+        <p>
+          I approach biology as an engineer: learning on demand, anchored to implementation,
+          building tools that make biological complexity legible to computation.
+        </p>
+        <br>
+        <p>
+          Beyond the lab, I'm building a smart greenhouse as a first tangible step toward
+          computational ecology, and exploring how traditional herbal knowledge can be
+          formalized through the lens of modern perturbation biology.
+        </p>
+
+        <div class="bio-links">
+          <a href="https://github.com/charliehou1920" target="_blank" class="bio-link">GitHub ↗</a>
+          <a href="https://huggingface.co" target="_blank" class="bio-link">HuggingFace ↗</a>
+          <a href="/cv.pdf" class="bio-link">CV ↗</a>
+          <a href="mailto:charlie@example.com" class="bio-link">Email ↗</a>
+        </div>
+      </div>
+
+      <div class="about-meta">
+        <div class="meta-block">
+          <span class="meta-label">Research Focus</span>
+          <ul class="meta-list">
+            <li>AI Virtual Cell (AIVC) Framework</li>
+            <li>Graph Neural Networks for Biology</li>
+            <li>Single-cell Transcriptomics</li>
+            <li>Uncertainty Quantification</li>
+            <li>Computational Herbology</li>
+          </ul>
+        </div>
+
+        <div class="meta-block">
+          <span class="meta-label">Target</span>
+          <p class="meta-value">Zitnik Lab, Harvard Medical School</p>
+          <p class="meta-value muted">Research AI Engineer · 1–3 year horizon</p>
+        </div>
+
+        <div class="meta-block">
+          <span class="meta-label">Core Stack</span>
+          <div class="tag-grid">
+            <span class="tag teal">PyTorch Geometric</span>
+            <span class="tag teal">scVI-tools</span>
+            <span class="tag teal">Scanpy / AnnData</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">Claude API</span>
+            <span class="tag amber">CELLxGENE Census</span>
+            <span class="tag amber">RDKit</span>
+          </div>
+        </div>
+
+        <div class="meta-block">
+          <span class="meta-label">Education</span>
+          <p class="meta-value">Computer Science · AI</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="now">
+    <div class="section-header reveal">
+      <span class="section-number">Now</span>
+      <h2 class="section-title">What I'm Working On</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="now-grid reveal">
+      <div class="now-card">
+        <span class="now-tag">Research</span>
+        <p class="now-text">Pan-cancer extension of TME-VI — zero-shot transfer to NSCLC using CELLxGENE Census (GSE176021).</p>
+      </div>
+      <div class="now-card">
+        <span class="now-tag">Building</span>
+        <p class="now-text">CellScout multi-agent RAG system for AIVC literature — knowledge graph + cross-paper synthesis.</p>
+      </div>
+      <div class="now-card">
+        <span class="now-tag teal">Maker</span>
+        <p class="now-text">Eco-Vault smart greenhouse — Raspberry Pi sensor stack, AnnData time-series pipeline.</p>
+      </div>
+      <div class="now-card">
+        <span class="now-tag amber">Exploring</span>
+        <p class="now-text">Computational herbology pipeline — field collection to Virtual Cell perturbation prediction.</p>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  #about-hero {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 4rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+  .page-title em { font-style: italic; color: var(--accent-teal); }
+  .page-subtitle {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  #about-main {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-bio {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  .about-bio strong { color: var(--text-primary); font-weight: 400; }
+  .bio-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+  .bio-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--accent-teal);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(62,207,184,0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .bio-link:hover { border-color: var(--accent-teal); }
+  .about-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .meta-block {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta-block:last-child { border-bottom: none; }
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .meta-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .meta-list li {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    padding-left: 1rem;
+    position: relative;
+  }
+  .meta-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  .meta-value {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .meta-value.muted { color: var(--text-muted); font-size: 0.8rem; }
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+  }
+  .tag.teal { border-color: rgba(62,207,184,0.3); color: var(--accent-teal); }
+  .tag.amber { border-color: rgba(232,170,90,0.3); color: var(--accent-amber); }
+  #now {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 4rem;
+    background: var(--bg-surface);
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-weight: 300;
+    color: var(--text-primary);
+  }
+  .section-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-left: 1rem;
+  }
+  .now-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .now-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .now-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+  }
+  .now-tag.teal { color: var(--accent-teal); }
+  .now-tag.amber { color: var(--accent-amber); }
+  .now-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
