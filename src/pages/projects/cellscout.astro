@@ -1,0 +1,399 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="CellScout">
+
+  <section id="project-hero">
+    <div class="hero-left">
+      <a href="/projects" class="back-link">← Projects</a>
+      <span class="project-scale">Knowledge Scale</span>
+      <h1 class="project-title">CellScout</h1>
+      <p class="project-full-name">AI Research Assistant for the AIVC Literature</p>
+      <p class="project-tagline">
+        Transforms academic papers into a queryable knowledge graph —
+        ask natural-language questions, get cross-paper synthesis
+        powered by a multi-agent RAG system.
+      </p>
+      <div class="hero-actions">
+        <a href="https://huggingface.co" target="_blank" class="btn btn-primary">Live Demo ↗</a>
+        <a href="https://github.com/charliehou1920" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="tag-block">
+        <span class="tag-label">Core Capabilities</span>
+        <div class="tag-list">
+          <span class="ptag coral">Natural Language Query</span>
+          <span class="ptag coral">Cross-paper Synthesis</span>
+          <span class="ptag coral">Knowledge Graph</span>
+          <span class="ptag coral">Method Lineage Tracking</span>
+        </div>
+      </div>
+      <div class="tag-block">
+        <span class="tag-label">Architecture</span>
+        <div class="tag-list">
+          <span class="ptag">Orchestrator Agent</span>
+          <span class="ptag">Ingestion Agent</span>
+          <span class="ptag">Analysis Agent</span>
+          <span class="ptag">Code Agent</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="project-body">
+
+    <div class="content-block reveal">
+      <h2 class="block-title">The Problem</h2>
+      <p class="block-text">
+        The AIVC field is growing faster than any individual researcher can track.
+        Knowledge is fragmented across hundreds of papers spanning scRNA-seq biology,
+        graph neural networks, variational inference, foundation models, and wet lab
+        validation. There is no tool that lets you ask <em>"which methods address
+        batch effects in single-cell data, and how have they evolved?"</em> and get
+        a grounded, cross-paper answer.
+      </p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">The Architecture</h2>
+      <p class="block-text">
+        CellScout is built on an <strong>Orchestrator + Worker</strong> multi-agent
+        pattern. The Orchestrator decomposes research queries into subtasks and
+        routes them to specialized agents. Unlike flat RAG systems, CellScout
+        reasons over a <strong>knowledge graph</strong> — capturing method lineage,
+        dataset usage, and open problems as typed edges between nodes.
+      </p>
+      <div class="agent-grid">
+        <div class="agent-card">
+          <span class="agent-name">Ingestion Agent</span>
+          <p class="agent-desc">
+            Reads papers and extracts structured knowledge — methods, datasets,
+            core claims, code links — into typed graph nodes.
+          </p>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">Analysis Agent</span>
+          <p class="agent-desc">
+            Traverses the knowledge graph to answer cross-paper questions.
+            Finds method evolution chains, dataset overlaps, and research gaps.
+          </p>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">Code Agent</span>
+          <p class="agent-desc">
+            Retrieves reference implementations from the knowledge base
+            and adapts them to your pipeline on request.
+          </p>
+        </div>
+        <div class="agent-card">
+          <span class="agent-name">Orchestrator</span>
+          <p class="agent-desc">
+            Decomposes queries, schedules agents, synthesizes results
+            into a coherent research-grade response.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Knowledge Graph Schema</h2>
+      <p class="block-text">
+        The graph captures biological knowledge structure — not just document chunks.
+        Typed edges enable reasoning that flat vector search cannot do.
+      </p>
+      <div class="schema-grid">
+        <div class="schema-col">
+          <span class="schema-label">Node Types</span>
+          <div class="schema-items">
+            <span class="schema-item">paper</span>
+            <span class="schema-item">method</span>
+            <span class="schema-item">dataset</span>
+            <span class="schema-item">concept</span>
+            <span class="schema-item">open_problem</span>
+          </div>
+        </div>
+        <div class="schema-col">
+          <span class="schema-label">Edge Types</span>
+          <div class="schema-items">
+            <span class="schema-item">INTRODUCES</span>
+            <span class="schema-item">IMPROVES_ON</span>
+            <span class="schema-item">USES</span>
+            <span class="schema-item">RELATED_TO</span>
+            <span class="schema-item">HAS_PROBLEM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Why Not Just RAG?</h2>
+      <p class="block-text">
+        Standard RAG retrieves document chunks by vector similarity — it cannot answer
+        <em>"how did method X evolve into method Y"</em> or <em>"which papers share
+        dataset Z and what did they find differently?"</em> The knowledge graph enables
+        graph traversal queries that surface relationships invisible to embedding search.
+        CellScout combines both: vector search for relevance, graph traversal for
+        relational reasoning.
+      </p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Stack</h2>
+      <div class="stack-full">
+        <div class="stack-group">
+          <span class="stack-group-label">Agents</span>
+          <div class="stack-tags">
+            <span class="stag">Anthropic Claude API</span>
+            <span class="stag">Custom Orchestration</span>
+            <span class="stag">LlamaIndex</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <span class="stack-group-label">Knowledge Graph</span>
+          <div class="stack-tags">
+            <span class="stag">Neo4j</span>
+            <span class="stag">NetworkX</span>
+            <span class="stag">Vector Embeddings</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <span class="stack-group-label">Deployment</span>
+          <div class="stack-tags">
+            <span class="stag">FastAPI</span>
+            <span class="stag">HuggingFace Spaces</span>
+            <span class="stag">Docker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</Layout>
+
+<style>
+  #project-hero {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 4rem 5rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 5rem;
+    align-items: start;
+  }
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent-coral); }
+  .project-scale {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-coral);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .project-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.3s forwards;
+  }
+  .project-full-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .project-tagline {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 48ch;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent-coral);
+    color: var(--bg);
+    border: 1px solid var(--accent-coral);
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent-coral); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-primary); }
+  .tag-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    margin-bottom: 1rem;
+  }
+  .tag-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .ptag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+  }
+  .ptag.coral { border-color: rgba(224,112,96,0.3); color: var(--accent-coral); }
+  #project-body {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 900px;
+  }
+  .content-block { display: flex; flex-direction: column; gap: 1.5rem; }
+  .block-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .block-text {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.85;
+  }
+  .block-text strong { color: var(--text-primary); font-weight: 400; }
+  .block-text em { color: var(--accent-coral); font-style: italic; }
+  .agent-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .agent-card {
+    background: var(--bg-card);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .agent-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-coral);
+  }
+  .agent-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .schema-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .schema-col {
+    background: var(--bg-card);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .schema-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .schema-items { display: flex; flex-direction: column; gap: 0.4rem; }
+  .schema-item {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .schema-item:last-child { border-bottom: none; }
+  .stack-full { display: flex; flex-direction: column; gap: 1.5rem; }
+  .stack-group { display: flex; flex-direction: column; gap: 0.75rem; }
+  .stack-group-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .stag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

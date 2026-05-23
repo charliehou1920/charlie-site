@@ -1,0 +1,395 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="MutaGraph">
+
+  <section id="project-hero">
+    <div class="hero-left">
+      <a href="/projects" class="back-link">← Projects</a>
+      <span class="project-scale">Molecular Scale</span>
+      <h1 class="project-title">MutaGraph</h1>
+      <p class="project-full-name">Graph Neural Network Protein Mutation Effect Predictor</p>
+      <p class="project-tagline">
+        A GAT-based platform that predicts how single-point mutations affect
+        protein stability and antibody-antigen binding affinity,
+        using graph attention over protein structure.
+      </p>
+      <div class="hero-actions">
+        <a href="https://huggingface.co" target="_blank" class="btn btn-primary">Live Demo ↗</a>
+        <a href="https://github.com/charliehou1920" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="tag-block">
+        <span class="tag-label">Prediction Targets</span>
+        <div class="tag-list">
+          <span class="ptag">Protein Stability ΔΔG</span>
+          <span class="ptag">Binding Affinity</span>
+          <span class="ptag">Single-point Mutations</span>
+        </div>
+      </div>
+      <div class="tag-block">
+        <span class="tag-label">Core Architecture</span>
+        <div class="tag-list">
+          <span class="ptag teal">Graph Attention Network</span>
+          <span class="ptag teal">PyTorch Geometric</span>
+          <span class="ptag teal">Protein Structure Graph</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="project-body">
+
+    <div class="content-block reveal">
+      <h2 class="block-title">The Problem</h2>
+      <p class="block-text">
+        Protein engineering and therapeutic antibody design require understanding
+        how mutations affect protein behavior. Experimental measurement of mutational
+        effects is slow and expensive — a computational model that predicts stability
+        changes (ΔΔG) and binding affinity from structure alone can dramatically
+        accelerate the design cycle.
+      </p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">The Approach</h2>
+      <p class="block-text">
+        MutaGraph represents proteins as <strong>graphs</strong> — nodes are residues,
+        edges encode spatial proximity and biochemical interactions. A Graph Attention
+        Network learns to propagate information across the structure, capturing
+        long-range dependencies that sequence-only models miss.
+      </p>
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <span class="step-name">Structure Graph Construction</span>
+            <p class="step-desc">
+              Protein structure parsed into a residue-level graph. Edges defined by
+              spatial distance cutoff and biochemical interaction type. Node features
+              include amino acid physicochemical properties.
+            </p>
+          </div>
+        </div>
+        <div class="pipeline-arrow">↓</div>
+        <div class="pipeline-step">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <span class="step-name">Graph Attention Network</span>
+            <p class="step-desc">
+              Multi-head GAT layers learn attention weights over neighboring residues,
+              capturing which structural contacts matter most for stability and binding.
+              Mutation encoded as node feature perturbation.
+            </p>
+          </div>
+        </div>
+        <div class="pipeline-arrow">↓</div>
+        <div class="pipeline-step">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <span class="step-name">ΔΔG / Affinity Prediction</span>
+            <p class="step-desc">
+              Graph-level readout predicts the thermodynamic stability change
+              upon mutation, and optionally the change in antibody-antigen
+              binding affinity for therapeutic design applications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Applications</h2>
+      <div class="app-grid">
+        <div class="app-card">
+          <span class="app-title">Protein Engineering</span>
+          <p class="app-desc">
+            Screen thousands of candidate mutations in silico before committing
+            to expensive wet lab synthesis and assays.
+          </p>
+        </div>
+        <div class="app-card">
+          <span class="app-title">Antibody Design</span>
+          <p class="app-desc">
+            Predict how mutations in the CDR loops affect antigen binding,
+            guiding affinity maturation campaigns.
+          </p>
+        </div>
+        <div class="app-card">
+          <span class="app-title">Disease Variant Analysis</span>
+          <p class="app-desc">
+            Assess the functional impact of clinically observed missense
+            variants on protein stability and interactions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Stack</h2>
+      <div class="stack-full">
+        <div class="stack-group">
+          <span class="stack-group-label">Model</span>
+          <div class="stack-tags">
+            <span class="stag">PyTorch Geometric</span>
+            <span class="stag">GAT</span>
+            <span class="stag">PyTorch</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <span class="stack-group-label">Data</span>
+          <div class="stack-tags">
+            <span class="stag">Protein Structure</span>
+            <span class="stag">BioPython</span>
+            <span class="stag">PDB</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <span class="stack-group-label">Deployment</span>
+          <div class="stack-tags">
+            <span class="stag">FastAPI</span>
+            <span class="stag">HuggingFace Spaces</span>
+            <span class="stag">Docker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</Layout>
+
+<style>
+  #project-hero {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 4rem 5rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 5rem;
+    align-items: start;
+  }
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent-amber); }
+  .project-scale {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .project-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.3s forwards;
+  }
+  .project-full-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .project-tagline {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 48ch;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent-amber);
+    color: var(--bg);
+    border: 1px solid var(--accent-amber);
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent-amber); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-primary); }
+  .tag-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    margin-bottom: 1rem;
+  }
+  .tag-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .ptag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+  }
+  .ptag.teal { border-color: rgba(62,207,184,0.3); color: var(--accent-teal); }
+  #project-body {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 900px;
+  }
+  .content-block { display: flex; flex-direction: column; gap: 1.5rem; }
+  .block-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .block-text {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.85;
+  }
+  .block-text strong { color: var(--text-primary); font-weight: 400; }
+  .pipeline { display: flex; flex-direction: column; gap: 0; margin-top: 0.5rem; }
+  .pipeline-step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+  .pipeline-arrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-muted);
+    padding-left: 1.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-left: 1px solid var(--border);
+  }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    padding-top: 0.2rem;
+  }
+  .step-name {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--accent-amber);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .step-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .app-card {
+    background: var(--bg-card);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .app-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+  }
+  .app-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .stack-full { display: flex; flex-direction: column; gap: 1.5rem; }
+  .stack-group { display: flex; flex-direction: column; gap: 0.75rem; }
+  .stack-group-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .stag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
