@@ -1,23 +1,164 @@
-<!doctype html>
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Charlie Hou — Computational Biology" } = Astro.props;
+---
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} — Charlie Hou</title>
+  <meta name="description" content={description}>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #060d08;
+      --bg-surface: #0d180f;
+      --bg-card: #111f14;
+      --bg-card-hover: #162419;
+      --text-primary: #dff0e3;
+      --text-secondary: #7a9e80;
+      --text-muted: #3d5c42;
+      --accent-teal: #3ecfb8;
+      --accent-amber: #e8aa5a;
+      --accent-coral: #e07060;
+      --accent-green: #5ab87a;
+      --border: rgba(62,207,184,0.12);
+      --border-hover: rgba(62,207,184,0.28);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(62,207,184,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(62,207,184,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">charlie.hou</a>
+    <ul class="nav-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/vision">Vision</a></li>
+      <li><a href="/blog">Writing</a></li>
+    </ul>
+  </nav>
+  <slot />
+  <footer>
+    <p class="footer-left">Understanding life, one scale at a time.</p>
+    <ul class="footer-links">
+      <li><a href="https://github.com/charliehou1920" target="_blank">GitHub</a></li>
+      <li><a href="https://huggingface.co" target="_blank">HuggingFace</a></li>
+      <li><a href="mailto:charlie@example.com">Email</a></li>
+    </ul>
+  </footer>
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(6,13,8,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent-teal);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent-teal); }
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 3rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-left {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent-teal); }
 </style>

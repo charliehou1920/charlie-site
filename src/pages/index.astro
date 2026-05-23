@@ -1,11 +1,518 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
+<Layout title="Home">
 
-<Layout>
-	<Welcome />
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">CS · AI · Computational Biology</p>
+    <h1 class="hero-title">
+      Building a unified<br>
+      computational lens<br>
+      <em>for life</em>
+    </h1>
+    <p class="hero-subtitle">
+      From protein mutations to tumor immune microenvironments to ecological systems —
+      I build AI instruments grounded in the AIVC framework that reason across
+      the scales of biological complexity.
+    </p>
+    <div class="hero-cta">
+      <a href="/projects" class="btn btn-primary">View Projects →</a>
+      <a href="/vision" class="btn btn-ghost">Vision ↗</a>
+      <a href="/about" class="btn btn-ghost">About me ↗</a>
+    </div>
+    <div class="hero-scale-diagram">
+      <div class="scale-node">
+        <span class="scale-label">Molecular</span>
+        <span class="scale-project">MutaGraph</span>
+      </div>
+      <div class="scale-connector"></div>
+      <div class="scale-node">
+        <span class="scale-label">Cellular</span>
+        <span class="scale-project">TME-VI</span>
+      </div>
+      <div class="scale-connector"></div>
+      <div class="scale-node">
+        <span class="scale-label">Knowledge</span>
+        <span class="scale-project">CellScout</span>
+      </div>
+      <div class="scale-connector"></div>
+      <div class="scale-node">
+        <span class="scale-label">Ecosystem</span>
+        <span class="scale-project">Eco-Vault</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS PREVIEW -->
+  <section id="projects-preview">
+    <div class="section-header reveal">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-divider"></div>
+      <a href="/projects" class="section-link">View all →</a>
+    </div>
+    <div class="projects-grid reveal">
+      <a href="/projects/tme-vi" class="project-card">
+        <div class="project-meta">
+          <span class="project-scale">Cellular Scale</span>
+          <span class="project-hf-badge">HF Space ↗</span>
+        </div>
+        <h3 class="project-name">TME-VI</h3>
+        <p class="project-desc">
+          Uncertainty-aware decoder virtual instrument for immunotherapy response
+          prediction in melanoma. scVI + GAT + MC Dropout.
+        </p>
+        <div class="project-stack">
+          <span class="stack-item">scVI</span>
+          <span class="stack-item">GAT</span>
+          <span class="stack-item">MC Dropout</span>
+          <span class="stack-item">AUROC 0.885</span>
+        </div>
+        <span class="project-arrow">→</span>
+      </a>
+      <a href="/projects/mutagraph" class="project-card">
+        <div class="project-meta">
+          <span class="project-scale">Molecular Scale</span>
+          <span class="project-hf-badge">HF Space ↗</span>
+        </div>
+        <h3 class="project-name">MutaGraph</h3>
+        <p class="project-desc">
+          GNN-based protein mutation effect prediction. Single-point mutations,
+          protein stability (ΔΔG) and antibody-antigen binding affinity.
+        </p>
+        <div class="project-stack">
+          <span class="stack-item">PyG</span>
+          <span class="stack-item">GAT</span>
+          <span class="stack-item">ΔΔG</span>
+          <span class="stack-item">Protein Structure</span>
+        </div>
+        <span class="project-arrow">→</span>
+      </a>
+      <a href="/projects/cellscout" class="project-card">
+        <div class="project-meta">
+          <span class="project-scale">Knowledge Scale</span>
+          <span class="project-hf-badge">HF Space ↗</span>
+        </div>
+        <h3 class="project-name">CellScout</h3>
+        <p class="project-desc">
+          AI research assistant for the AIVC literature. Natural language queries
+          across papers, cross-paper synthesis via knowledge graph.
+        </p>
+        <div class="project-stack">
+          <span class="stack-item">Multi-agent</span>
+          <span class="stack-item">RAG</span>
+          <span class="stack-item">Knowledge Graph</span>
+          <span class="stack-item">Claude API</span>
+        </div>
+        <span class="project-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- VISION PREVIEW -->
+  <section id="vision-preview">
+    <div class="section-header reveal">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Vision</h2>
+      <div class="section-divider"></div>
+      <a href="/vision" class="section-link">Explore →</a>
+    </div>
+    <div class="vision-grid reveal">
+      <a href="/vision#ecovault" class="vision-card">
+        <span class="vision-tag">Eco-Vault</span>
+        <h3 class="vision-title">Building a Smart Greenhouse</h3>
+        <p class="vision-desc">
+          A maker build log — sensor stack, Raspberry Pi edge compute,
+          and a bridge to AIVC concepts. Treating ecology as a biological system.
+        </p>
+        <span class="vision-status">● In Build</span>
+      </a>
+      <a href="/vision#herbology" class="vision-card">
+        <span class="vision-tag herbal">Comp. Herbology</span>
+        <h3 class="vision-title">Computational Ethnobotany</h3>
+        <p class="vision-desc">
+          Field collection → LC-MS → LINCS L1000 → Virtual Cell perturbation prediction.
+          Bridging traditional herbal knowledge and modern computational biology.
+        </p>
+        <span class="vision-status amber">● Research</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section id="blog-preview">
+    <div class="section-header reveal">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Writing</h2>
+      <div class="section-divider"></div>
+      <a href="/blog" class="section-link">All posts →</a>
+    </div>
+    <div class="blog-list reveal">
+      <a href="/blog" class="blog-row">
+        <span class="blog-cat">AIVC</span>
+        <span class="blog-title-row">Decoder Virtual Instruments as Epistemic Tools</span>
+        <span class="blog-date-row">2026</span>
+      </a>
+      <a href="/blog" class="blog-row">
+        <span class="blog-cat herbal">Comp. Herbology</span>
+        <span class="blog-title-row">From Field to Perturbation: A Pipeline for Computational Ethnobotany</span>
+        <span class="blog-date-row">2026</span>
+      </a>
+      <a href="/blog" class="blog-row">
+        <span class="blog-cat">AIVC</span>
+        <span class="blog-title-row">Zero-shot Transfer Across Cancer Types: Promise and Pitfalls</span>
+        <span class="blog-date-row">2025</span>
+      </a>
+    </div>
+  </section>
+
 </Layout>
+
+<style>
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text-primary);
+    max-width: 16ch;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--accent-teal); }
+  .hero-subtitle {
+    margin-top: 2.5rem;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 52ch;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s forwards;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent-teal);
+    color: var(--bg);
+    border: 1px solid var(--accent-teal);
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent-teal); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-primary); }
+  .hero-scale-diagram {
+    position: absolute;
+    right: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.8s forwards;
+  }
+  .scale-node {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem 1.5rem;
+    border-left: 1px solid var(--border);
+    position: relative;
+  }
+  .scale-node::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 50%;
+    transform: translateY(-50%);
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent-teal);
+    opacity: 0.6;
+  }
+  .scale-connector {
+    width: 1px; height: 24px;
+    background: linear-gradient(to bottom, transparent, var(--border), transparent);
+    margin-left: calc(1.5rem - 1px);
+  }
+  .scale-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    width: 80px;
+  }
+  .scale-project {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 4rem;
+  }
+  #vision-preview {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  #blog-preview {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--text-primary);
+  }
+  .section-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-left: 1rem;
+  }
+  .section-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-teal);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .project-card {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-decoration: none;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--card-accent, var(--accent-teal));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .project-card:hover { background: var(--bg-card-hover); }
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-card:nth-child(1) { --card-accent: var(--accent-teal); }
+  .project-card:nth-child(2) { --card-accent: var(--accent-amber); }
+  .project-card:nth-child(3) { --card-accent: var(--accent-coral); }
+  .project-meta { display: flex; align-items: center; justify-content: space-between; }
+  .project-scale {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--card-accent, var(--accent-teal));
+  }
+  .project-hf-badge {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+  .project-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    flex: 1;
+  }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-item {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .project-arrow {
+    align-self: flex-end;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .project-card:hover .project-arrow {
+    color: var(--card-accent, var(--accent-teal));
+    transform: translateX(4px);
+  }
+  .vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .vision-card {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .vision-card:hover { background: var(--bg-card-hover); }
+  .vision-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+  }
+  .vision-tag.herbal { color: var(--accent-amber); }
+  .vision-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+  .vision-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    flex: 1;
+  }
+  .vision-status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent-green);
+    letter-spacing: 0.06em;
+  }
+  .vision-status.amber { color: var(--accent-amber); }
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+  }
+  .blog-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 60px;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .blog-row:last-child { border-bottom: none; }
+  .blog-row:hover { background: var(--bg-card); }
+  .blog-cat {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+  }
+  .blog-cat.herbal { color: var(--accent-amber); }
+  .blog-title-row {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-primary);
+  }
+  .blog-date-row {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
