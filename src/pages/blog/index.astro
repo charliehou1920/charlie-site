@@ -1,0 +1,235 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const posts = [
+  {
+    slug: "#",
+    category: "AIVC",
+    title: "Decoder Virtual Instruments as Epistemic Tools: What Uncertainty Tells Us About the Tumor Microenvironment",
+    excerpt: "When TME-VI declines to make a prediction, it's not failing — it's communicating genuine biological ambiguity. Here's what high-entropy cell neighborhoods reveal about immune escape.",
+    date: "2026",
+    readTime: "12 min",
+  },
+  {
+    slug: "#",
+    category: "AIVC",
+    title: "Zero-shot Transfer Across Cancer Types: Promise and Pitfalls",
+    excerpt: "Extending a melanoma-trained model to NSCLC via CELLxGENE Census — what transfers, what doesn't, and what that tells us about the universality of immune cell representations.",
+    date: "2026",
+    readTime: "8 min",
+  },
+  {
+    slug: "#",
+    category: "Comp. Herbology",
+    title: "From Field to Perturbation: A Pipeline for Computational Ethnobotany",
+    excerpt: "How do you turn a medicinal herb into a Virtual Cell experiment? A walkthrough of the full pipeline from LC-MS profiling to LINCS L1000 mapping to perturbation prediction.",
+    date: "2026",
+    readTime: "10 min",
+  },
+  {
+    slug: "#",
+    category: "AIVC",
+    title: "Why Knowledge Graphs Beat Flat RAG for Scientific Literature",
+    excerpt: "Vector search retrieves relevant chunks. Knowledge graphs answer relational questions. Here's why CellScout uses both, and when each one wins.",
+    date: "2025",
+    readTime: "7 min",
+  },
+  {
+    slug: "#",
+    category: "Comp. Herbology",
+    title: "Ligand-receptor Priors Meet Traditional Medicine",
+    excerpt: "CellChatDB and NicheNet encode known signaling relationships. Can the same prior knowledge infrastructure validate traditional herbal hypotheses computationally?",
+    date: "2025",
+    readTime: "6 min",
+  },
+];
+---
+<Layout title="Writing">
+
+  <section id="blog-hero">
+    <p class="eyebrow">Writing</p>
+    <h1 class="page-title">Notes on <em>Biology & Computation</em></h1>
+    <p class="page-subtitle">
+      Technical posts and research notes on AIVC, single-cell biology,
+      and computational herbology.
+    </p>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="AIVC">AIVC</button>
+      <button class="filter-btn" data-filter="Comp. Herbology">Comp. Herbology</button>
+    </div>
+  </section>
+
+  <section id="blog-list">
+    {posts.map((post) => (
+      <a href={post.slug} class="post-row reveal" data-category={post.category}>
+        <div class="post-left">
+          <span class={`post-cat ${post.category === 'Comp. Herbology' ? 'amber' : ''}`}>
+            {post.category}
+          </span>
+          <h2 class="post-title">{post.title}</h2>
+          <p class="post-excerpt">{post.excerpt}</p>
+        </div>
+        <div class="post-right">
+          <span class="post-date">{post.date}</span>
+          <span class="post-read">{post.readTime} read</span>
+          <span class="post-arrow">→</span>
+        </div>
+      </a>
+    ))}
+  </section>
+
+</Layout>
+
+<style>
+  #blog-hero {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 4rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+  .page-title em { font-style: italic; color: var(--accent-teal); }
+  .page-subtitle {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 52ch;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .filter-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { color: var(--text-primary); border-color: var(--border-hover); }
+  .filter-btn.active { border-color: var(--accent-teal); color: var(--accent-teal); }
+  #blog-list {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .post-row {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 3rem;
+    padding: 3rem 4rem;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: background 0.2s;
+    align-items: start;
+  }
+  .post-row:hover { background: var(--bg-card); }
+  .post-row.hidden { display: none; }
+  .post-left { display: flex; flex-direction: column; gap: 1rem; }
+  .post-cat {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+  }
+  .post-cat.amber { color: var(--accent-amber); }
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.2;
+    max-width: 60ch;
+  }
+  .post-excerpt {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    max-width: 65ch;
+  }
+  .post-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    padding-top: 0.25rem;
+  }
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+  .post-read {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  .post-arrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: auto;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .post-row:hover .post-arrow { color: var(--accent-teal); transform: translateX(4px); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  const btns = document.querySelectorAll('.filter-btn');
+  const rows = document.querySelectorAll('.post-row');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      rows.forEach(row => {
+        if (filter === 'all' || row.dataset.category === filter) {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
