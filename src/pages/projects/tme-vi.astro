@@ -1,0 +1,383 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="TME-VI">
+
+  <section id="project-hero">
+    <div class="hero-left">
+      <a href="/projects" class="back-link">← Projects</a>
+      <span class="project-scale">Cellular Scale</span>
+      <h1 class="project-title">TME-VI</h1>
+      <p class="project-full-name">Tumor Microenvironment Variational Inference</p>
+      <p class="project-tagline">
+        An uncertainty-aware decoder virtual instrument for immunotherapy
+        response prediction in melanoma, grounded in the AIVC framework.
+      </p>
+      <div class="hero-actions">
+        <a href="https://huggingface.co" target="_blank" class="btn btn-primary">Live Demo ↗</a>
+        <a href="https://github.com/charliehou1920" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="metric-grid">
+        <div class="metric">
+          <span class="metric-val">0.885</span>
+          <span class="metric-label">Cell-level AUROC</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">0.97</span>
+          <span class="metric-label">Confidence-filtered AUROC</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">0.78</span>
+          <span class="metric-label">Patient-level AUROC</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">16,290</span>
+          <span class="metric-label">CD45+ immune cells</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">32</span>
+          <span class="metric-label">Melanoma patients</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">8</span>
+          <span class="metric-label">Cell types</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="project-body">
+
+    <div class="content-block reveal">
+      <h2 class="block-title">The Problem</h2>
+      <p class="block-text">
+        Anti-PD-1 immunotherapy produces durable responses in some melanoma patients
+        but fails in others. The tumor microenvironment — the ecosystem of immune cells
+        surrounding a tumor — holds the key to predicting who will respond. But
+        extracting actionable signal from tens of thousands of single cells per patient,
+        while quantifying the model's uncertainty, remains a hard problem.
+      </p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">The Approach</h2>
+      <p class="block-text">
+        TME-VI implements a <strong>Decoder Virtual Instrument</strong> in the AIVC framework.
+        The pipeline has three stages:
+      </p>
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <span class="step-name">scVI Encoder</span>
+            <p class="step-desc">Variational autoencoder learns a 10-dimensional cellular universal representation from raw scRNA-seq counts, correcting for batch effects across patients.</p>
+          </div>
+        </div>
+        <div class="pipeline-arrow">↓</div>
+        <div class="pipeline-step">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <span class="step-name">GATDecoderVI</span>
+            <p class="step-desc">Graph Attention Network operates on a k-NN cell graph built from latent space proximity. MC Dropout applied at inference time for uncertainty quantification.</p>
+          </div>
+        </div>
+        <div class="pipeline-arrow">↓</div>
+        <div class="pipeline-step">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <span class="step-name">Patient Aggregation</span>
+            <p class="step-desc">Cell-level predictions aggregated per patient using confidence-weighted scoring. Top 20% most confident cells yield AUROC 0.97.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Dataset</h2>
+      <p class="block-text">
+        <strong>GSE120575</strong> (Sade-Feldman et al. 2018) — 16,290 CD45+ immune cells
+        from 32 melanoma patients profiled before and during anti-PD-1 treatment.
+        8 annotated cell types including Cytotoxic CD8 T, CD4 T, Naive/Memory CD8 T,
+        B cell, Macrophage, γδ T, Plasma cell, and pDC.
+      </p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">AIVC Connection</h2>
+      <p class="block-text">
+        This project directly instantiates the AIVC vision from Bunne et al. (Cell, 2024):
+        scVI embeddings serve as the <strong>cellular universal representation</strong>,
+        the GAT decoder is a <strong>decoder virtual instrument</strong>, and MC Dropout
+        implements the <strong>uncertainty quantification</strong> explicitly called for
+        in the paper. The LLM report layer translates numerical GNN outputs into
+        human-readable biological language.
+      </p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Limitations & Next Steps</h2>
+      <p class="block-text">
+        The 32-patient cohort is a hard ceiling on patient-level generalization.
+        The immediate next step is <strong>pan-cancer extension</strong> — zero-shot
+        transfer to NSCLC using GSE176021 (Caushi et al. 2021) via CELLxGENE Census,
+        targeting a universal representation that generalizes across cancer types.
+      </p>
+    </div>
+
+    <div class="content-block reveal">
+      <h2 class="block-title">Stack</h2>
+      <div class="stack-full">
+        <div class="stack-group">
+          <span class="stack-group-label">Model</span>
+          <div class="stack-tags">
+            <span class="stag">scVI-tools</span>
+            <span class="stag">PyTorch Geometric</span>
+            <span class="stag">GAT</span>
+            <span class="stag">MC Dropout</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <span class="stack-group-label">Data</span>
+          <div class="stack-tags">
+            <span class="stag">Scanpy / AnnData</span>
+            <span class="stag">GSE120575</span>
+            <span class="stag">CELLxGENE Census</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <span class="stack-group-label">Deployment</span>
+          <div class="stack-tags">
+            <span class="stag">FastAPI</span>
+            <span class="stag">Streamlit</span>
+            <span class="stag">HuggingFace Spaces</span>
+            <span class="stag">Docker</span>
+            <span class="stag">Claude API</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</Layout>
+
+<style>
+  #project-hero {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 4rem 5rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 5rem;
+    align-items: start;
+  }
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent-teal); }
+  .project-scale {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .project-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.3s forwards;
+  }
+  .project-full-name {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .project-tagline {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 48ch;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent-teal);
+    color: var(--bg);
+    border: 1px solid var(--accent-teal);
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent-teal); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-primary); }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .metric {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .metric-val {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--accent-teal);
+    line-height: 1;
+  }
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  #project-body {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 900px;
+  }
+  .content-block { display: flex; flex-direction: column; gap: 1.5rem; }
+  .block-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .block-text {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.85;
+  }
+  .block-text strong { color: var(--text-primary); font-weight: 400; }
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0.5rem;
+  }
+  .pipeline-step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+  .pipeline-arrow {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text-muted);
+    padding-left: 1.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    border-left: 1px solid var(--border);
+    margin-left: 0;
+  }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    padding-top: 0.2rem;
+  }
+  .step-name {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--accent-teal);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .step-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .stack-full {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .stack-group { display: flex; flex-direction: column; gap: 0.75rem; }
+  .stack-group-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .stag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
