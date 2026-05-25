@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Layout title={post.data.title}>
+
+  <section id="post-hero">
+    <a href="/blog" class="back-link">← Writing</a>
+    <span class={`post-cat ${post.data.category === 'Comp. Herbology' ? 'amber' : ''}`}>
+      {post.data.category}
+    </span>
+    <h1 class="post-title">{post.data.title}</h1>
+    <div class="post-meta">
+      <span>{post.data.date}</span>
+      <span>·</span>
+      <span>{post.data.readTime} read</span>
+    </div>
+  </section>
+
+  <article id="post-body">
+    <Content />
+  </article>
+
+</Layout>
+
+<style>
+  #post-hero {
+    position: relative;
+    z-index: 1;
+    padding: 10rem 4rem 4rem;
+    border-bottom: 1px solid var(--border);
+    max-width: 800px;
+  }
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent-teal); }
+  .post-cat {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+  }
+  .post-cat.amber { color: var(--accent-amber); }
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+  .post-meta {
+    display: flex;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  #post-body {
+    position: relative;
+    z-index: 1;
+    padding: 4rem;
+    max-width: 800px;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.85;
+  }
+  #post-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  #post-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+  }
+  #post-body p { margin-bottom: 1.25rem; }
+  #post-body strong { color: var(--text-primary); font-weight: 400; }
+  #post-body em { color: var(--accent-teal); font-style: italic; }
+  #post-body code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    color: var(--accent-teal);
+  }
+  #post-body pre {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  #post-body pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+  #post-body ul, #post-body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  #post-body li { margin-bottom: 0.4rem; }
+</style>
